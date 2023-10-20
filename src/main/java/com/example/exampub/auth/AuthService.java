@@ -32,6 +32,7 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(userRole)
+                .isActive(true)
                 .birthdate(request.getBirthdate())
                 .pocket(request.getPocket())
                 .build();
