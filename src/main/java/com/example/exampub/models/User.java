@@ -9,7 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,13 +27,14 @@ public class User implements UserDetails {
     @Column(name = "id_user")
     private Long userId;
 
-    @Column(unique = true)
     private String userName;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
 
+    private boolean isActive;
 
     private String birthdate;
 
@@ -38,10 +42,25 @@ public class User implements UserDetails {
 
     private String orders;
 
-
-
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    public boolean isAdult() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthdateDate = sdf.parse(birthdate);
+            Date currentDate = new Date();
+            long diff = currentDate.getTime() - birthdateDate.getTime();
+            long age = diff / (24 * 60 * 60 * 1000) / 365;
+            return age >= 18;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
