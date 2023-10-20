@@ -8,7 +8,7 @@ import lombok.Setter;
 @Data
 @Setter
 @Getter
-public class UserDTO {
+public class UserNoOrderDTO {
 
     private Long userId;
 
@@ -20,7 +20,7 @@ public class UserDTO {
 
     private double pocket;
 
-    public UserDTO(User user) {
+    public UserNoOrderDTO(User user) {
         this.userId = user.getUserId();
         this.userName = user.getUsername();
         this.iaActive = user.isActive();

@@ -2,6 +2,7 @@ package com.example.exampub.services;
 
 
 import com.example.exampub.models.dtos.UserDTO;
+import com.example.exampub.models.dtos.UserNoOrderDTO;
 
 import java.util.List;
 
@@ -10,7 +11,8 @@ public interface UserService {
 
     String getCurrentUserName();
 
-    List<UserDTO> getAllUsersDTO();
+    List<UserNoOrderDTO> getAllUsersNoOrderDTO();
+    UserDTO getUserById(Long id);
 
 
 }

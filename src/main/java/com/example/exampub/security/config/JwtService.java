@@ -13,11 +13,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 @Service
 public class JwtService {
-    @SuppressWarnings("checkstyle:LineLength")
     private static final String SECRET_KEY =
             "wgf4U3xTOXeoebCTRws1Xxy90eJCZlSgNyspPPqotp4rpbxW71PqXdqD4Ee7Nn+PPnk6mM5jSvdKyqR/fdYfBQ/JeMXr/uxOzWhMgNHBAHiYjhIKWFNM+J7IGV7rpaLVtZpErJJNJ+eYnjUklUbPnR7GG87+kb3PglVpchjGmzIZFGDL3FAHkFrm7jL8PZjnyM9O2BCHwyh2EQiytbmZveu2ku3OkDHKHqlktDSCP2X2HAtB7kTj0LkRMg3TNJy6WlzG9vhfS/bB2SeZfbKKeRB7zaEe89R1qYUiHmnbBOwTCdfh4FpVRafgmYxaHWlXt1z37mOloIzPBa/41M4+ZA==\n";
 
@@ -36,7 +33,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

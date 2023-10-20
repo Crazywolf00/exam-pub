@@ -4,6 +4,7 @@ package com.example.exampub.services;
 import com.example.exampub.models.Role;
 import com.example.exampub.models.User;
 import com.example.exampub.models.dtos.UserDTO;
+import com.example.exampub.models.dtos.UserNoOrderDTO;
 import com.example.exampub.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,14 +37,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsersDTO() {
-        List<UserDTO> usersOnlyDTO = new ArrayList<>();
+    public List<UserNoOrderDTO> getAllUsersNoOrderDTO() {
+        List<UserNoOrderDTO> usersOnlyDTO = new ArrayList<>();
         for (User user:userRepository.findAll()) {
             if(user.getRole() == Role.USER) {
-                usersOnlyDTO.add(new UserDTO(user));
+                usersOnlyDTO.add(new UserNoOrderDTO(user));
             }
         }
         return usersOnlyDTO;
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        return new UserDTO(userRepository.getUserByUserId(id));
     }
 
 

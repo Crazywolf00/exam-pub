@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -40,10 +41,14 @@ public class User implements UserDetails {
 
     private double pocket;
 
-    private String orders;
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<UserOrder> orders = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
 
 
     public boolean isAdult() {
