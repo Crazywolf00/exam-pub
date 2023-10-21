@@ -75,9 +75,9 @@ public class UserServiceImpl implements UserService {
 
         for (UserOrder order : user.getOrders()) {
             if(Objects.equals(order.getProductName(), product.getProductName())) {
-                order.increaseAmount();
+                order.increaseAmount(product.getPrice());
                 orderRepository.save(order);
-                user.pay(order);
+                user.pay(product.getPrice());
                 userRepository.save(user);
                 return "You bought a " + product.getProductName() + " for " + product.getPrice();
             }
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
         order.setUser(user);
         orderRepository.save(order);
         user.addOrder(order);
-        user.pay(order);
+        user.pay(product.getPrice());
         userRepository.save(user);
         return "You bought a " + product.getProductName() + " for " + product.getPrice();
     }

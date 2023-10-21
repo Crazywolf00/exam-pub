@@ -53,8 +53,8 @@ public class User implements UserDetails {
         orders.add(userOrder);
     }
 
-    public void pay(UserOrder userOrder) {
-        pocket-= userOrder.getPrice();
+    public void pay(double price) {
+        pocket-= price;
     }
 
     public boolean isAdult() {

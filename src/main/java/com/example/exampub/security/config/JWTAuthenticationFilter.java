@@ -40,7 +40,6 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         while (enumeration.hasMoreElements()) {
             String headerName = enumeration.nextElement();
             String headerValue = request.getHeader(headerName);
-            System.out.println(headerName + ": " + headerValue);
             if(Objects.equals(headerName, "cookie")) {
                 authHeader = headerValue;
             }

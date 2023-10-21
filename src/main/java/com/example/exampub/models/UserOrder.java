@@ -22,13 +22,13 @@ public class UserOrder {
     private User user;
 
     public UserOrder(Product product) {
-        this.id = product.getId();
         this.productName = product.getProductName();
         this.price = product.getPrice();
         this.amount = 1;
     }
 
-    public void increaseAmount() {
+    public void increaseAmount(double inputPrice) {
         amount++;
+        price += inputPrice;
     }
 }
