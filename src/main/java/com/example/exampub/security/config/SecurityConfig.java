@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import static com.example.exampub.models.Role.OWNER;
+import static com.example.exampub.models.Role.USER;
 
 @RequiredArgsConstructor
 @Configuration
@@ -36,6 +38,8 @@ public class SecurityConfig {
                         request.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/auth/login").permitAll()
                                 .requestMatchers("/api/auth/authenticate").permitAll()
+                                .requestMatchers("/summary/*").hasAuthority(OWNER.name())
+                                .requestMatchers("/*").hasAuthority(USER.name())
                                 .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
