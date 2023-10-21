@@ -1,5 +1,6 @@
 package com.example.exampub.controllers;
 
+import com.example.exampub.services.DrinkService;
 import com.example.exampub.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,13 @@ public class ApiController {
 
     private final UserService userService;
 
+    private final DrinkService drinkService;
+
 
     @Autowired
-    public ApiController(UserService userService) {
+    public ApiController(UserService userService, DrinkService drinkService) {
         this.userService = userService;
+        this.drinkService = drinkService;
     }
 
     @GetMapping("/users")
@@ -29,6 +33,11 @@ public class ApiController {
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable Optional<Long> id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id.get()));
+    }
+
+    @GetMapping("/drink-menu")
+    public ResponseEntity<?> getDrinkMenu() {
+        return ResponseEntity.status(HttpStatus.OK).body(drinkService.getAllDrinks());
     }
 
 
