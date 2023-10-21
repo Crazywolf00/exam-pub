@@ -9,17 +9,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Drink {
+public class Product {
     @Id
     @GeneratedValue
-    @Column(name = "id_drink")
+    @Column(name = "id_product")
     private Long id;
 
     private String productName;
     private double price;
     private boolean isForAdult;
 
-    public Drink(String productName, double price, boolean isForAdult) {
+    public Product(String productName, double price, boolean isForAdult) {
         this.productName = productName;
         this.price = price;
         this.isForAdult = isForAdult;

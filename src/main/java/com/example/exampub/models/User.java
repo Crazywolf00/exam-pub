@@ -49,7 +49,13 @@ public class User implements UserDetails {
     private Role role;
 
 
+    public void addOrder(UserOrder userOrder) {
+        orders.add(userOrder);
+    }
 
+    public void pay(UserOrder userOrder) {
+        pocket-= userOrder.getPrice();
+    }
 
     public boolean isAdult() {
         try {

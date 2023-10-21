@@ -1,13 +1,12 @@
 package com.example.exampub.controllers;
 
-import com.example.exampub.services.DrinkService;
+import com.example.exampub.models.Product;
+import com.example.exampub.services.ProductService;
 import com.example.exampub.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -16,13 +15,14 @@ public class ApiController {
 
     private final UserService userService;
 
-    private final DrinkService drinkService;
+    private final ProductService productService;
+
 
 
     @Autowired
-    public ApiController(UserService userService, DrinkService drinkService) {
+    public ApiController(UserService userService, ProductService productService) {
         this.userService = userService;
-        this.drinkService = drinkService;
+        this.productService = productService;
     }
 
     @GetMapping("/users")
@@ -37,8 +37,15 @@ public class ApiController {
 
     @GetMapping("/drink-menu")
     public ResponseEntity<?> getDrinkMenu() {
-        return ResponseEntity.status(HttpStatus.OK).body(drinkService.getAllDrinks());
+        return ResponseEntity.status(HttpStatus.OK).body(productService.getAllDrinks());
     }
 
 
+    @PostMapping("/buy")
+    public ResponseEntity<?> buy(@RequestParam Optional<Long> userID,
+                                 @RequestParam Optional<Long> drinkID) {
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(userService.orderMediation(productService.getProductByID(drinkID.get()), userID.get()));
+    }
 }
