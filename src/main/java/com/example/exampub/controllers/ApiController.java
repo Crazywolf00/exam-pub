@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -16,7 +17,6 @@ public class ApiController {
     private final UserService userService;
 
     private final ProductService productService;
-
 
 
     @Autowired
@@ -42,10 +42,20 @@ public class ApiController {
 
 
     @PostMapping("/buy")
-    public ResponseEntity<?> buy(@RequestParam Optional<Long> userID,
-                                 @RequestParam Optional<Long> drinkID) {
+    public ResponseEntity<?> buy(@RequestParam Long userID,
+                                 @RequestParam Long productID) {
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(userService.orderMediation(productService.getProductByID(drinkID.get()), userID.get()));
+        if(userService.getUserById(userID) == null || productService.getProductByID(productID) == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(userService.getUserById(userID) == null ? "User not found" : "Product not found");
+        }
+
+        String result = userService.orderMediation(productService.getProductByID(productID), userID);
+        if (Objects.equals(result, "You are too yong") || Objects.equals(result, "You don't have enough money")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+
     }
 }
