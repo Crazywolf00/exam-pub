@@ -31,8 +31,8 @@ public class ApiController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<?> getUserByID(@PathVariable Optional<Long> id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id.get()));
+    public ResponseEntity<?> getUserByID(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 
     @GetMapping("/drink-menu")

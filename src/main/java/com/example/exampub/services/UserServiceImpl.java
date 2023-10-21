@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
             return "You don't have enough money";
         }
 
-
         for (UserOrder order : user.getOrders()) {
             if(Objects.equals(order.getProductName(), product.getProductName())) {
                 order.increaseAmount();
