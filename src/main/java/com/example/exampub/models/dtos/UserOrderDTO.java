@@ -1,8 +1,6 @@
 package com.example.exampub.models.dtos;
 
-import com.example.exampub.models.User;
 import com.example.exampub.models.UserOrder;
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

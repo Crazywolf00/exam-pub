@@ -28,6 +28,7 @@ public class OwnerController {
     public ResponseEntity<?> getAllOrdersInfo() {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getOrdersInfo());
     }
+
     @GetMapping("/user")
     public ResponseEntity<?> getAllUsersOrders() {
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllUsersOrderInfo());

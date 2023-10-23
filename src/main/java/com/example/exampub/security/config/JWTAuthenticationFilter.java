@@ -40,14 +40,14 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         while (enumeration.hasMoreElements()) {
             String headerName = enumeration.nextElement();
             String headerValue = request.getHeader(headerName);
-            if(Objects.equals(headerName, "cookie")) {
+            if (Objects.equals(headerName, "cookie")) {
                 authHeader = headerValue;
             }
         }
 
-        if(authHeader != null) {
-            for (String auth:authHeader.split("; ")) {
-                if(auth.startsWith("Bearer ")) {
+        if (authHeader != null) {
+            for (String auth : authHeader.split("; ")) {
+                if (auth.startsWith("Bearer ")) {
                     authHeader = auth;
                 }
             }

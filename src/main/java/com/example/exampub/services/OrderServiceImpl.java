@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
 
     private final OrderRepository orderRepository;
@@ -37,20 +37,20 @@ public class OrderServiceImpl implements OrderService{
 
         List<ProductInfoDTO> productsDTO = new ArrayList<>();
 
-        for (Product product: productRepository.findAll()) {
+        for (Product product : productRepository.findAll()) {
             productsDTO.add(new ProductInfoDTO(product));
         }
 
-        for (UserOrder order: orderRepository.findAll()) {
-            for (ProductInfoDTO productDTO: productsDTO) {
-                if(Objects.equals(order.getProductName(), productDTO.getProductName())) {
+        for (UserOrder order : orderRepository.findAll()) {
+            for (ProductInfoDTO productDTO : productsDTO) {
+                if (Objects.equals(order.getProductName(), productDTO.getProductName())) {
                     productDTO.increaseAmount(order.getAmount());
                     break;
                 }
             }
         }
 
-        for (ProductInfoDTO productDTO: productsDTO) {
+        for (ProductInfoDTO productDTO : productsDTO) {
             productDTO.countSummaryPrice();
         }
 
@@ -61,13 +61,13 @@ public class OrderServiceImpl implements OrderService{
     public List<OrdersInfoDTO> getOrdersInfo() {
         List<OrdersInfoDTO> ordersInfoDTO = new ArrayList<>();
 
-        for (Product product: productRepository.findAll()) {
+        for (Product product : productRepository.findAll()) {
             ordersInfoDTO.add(new OrdersInfoDTO(product));
         }
 
-        for (UserOrder order: orderRepository.findAll()) {
-            for (OrdersInfoDTO orderInfoDTO: ordersInfoDTO) {
-                if(Objects.equals(order.getProductName(), orderInfoDTO.getProductName())) {
+        for (UserOrder order : orderRepository.findAll()) {
+            for (OrdersInfoDTO orderInfoDTO : ordersInfoDTO) {
+                if (Objects.equals(order.getProductName(), orderInfoDTO.getProductName())) {
                     orderInfoDTO.addOrder(order);
                     break;
                 }
@@ -80,12 +80,11 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public List<UserDTO> getAllUsersOrderInfo() {
         List<UserDTO> usersOrdersDTO = new ArrayList<>();
-        for (User user: userRepository.findAll()) {
-            usersOrdersDTO.add( new UserDTO(user));
+        for (User user : userRepository.findAll()) {
+            usersOrdersDTO.add(new UserDTO(user));
         }
         return usersOrdersDTO;
     }
-
 
 
 }

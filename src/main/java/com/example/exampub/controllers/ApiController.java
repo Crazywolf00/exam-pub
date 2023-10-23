@@ -1,6 +1,5 @@
 package com.example.exampub.controllers;
 
-import com.example.exampub.models.Product;
 import com.example.exampub.services.ProductService;
 import com.example.exampub.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 public class ApiController {
@@ -32,7 +30,7 @@ public class ApiController {
 
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable Long id) {
-        if(userService.getUserById(id) != null) {
+        if (userService.getUserById(id) != null) {
             return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -48,7 +46,7 @@ public class ApiController {
     public ResponseEntity<?> buy(@RequestParam Long userID,
                                  @RequestParam Long productID) {
 
-        if(userService.getUserById(userID) == null || productService.getProductByID(productID) == null) {
+        if (userService.getUserById(userID) == null || productService.getProductByID(productID) == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(userService.getUserById(userID) == null ? "User not found" : "Product not found");
         }

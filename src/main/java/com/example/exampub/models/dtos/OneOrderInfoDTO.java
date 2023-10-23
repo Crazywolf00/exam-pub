@@ -15,7 +15,6 @@ public class OneOrderInfoDTO {
     private double price;
 
 
-
     public OneOrderInfoDTO(UserOrder userOrder) {
         this.userID = userOrder.getUser().getUserId();
         this.amount = userOrder.getAmount();

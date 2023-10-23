@@ -13,6 +13,7 @@ public interface UserService {
     String getCurrentUserName();
 
     List<UserNoOrderDTO> getAllUsersNoOrderDTO();
+
     UserDTO getUserById(Long id);
 
     String orderMediation(Product product, Long userID);

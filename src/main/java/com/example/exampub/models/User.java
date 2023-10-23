@@ -54,7 +54,7 @@ public class User implements UserDetails {
     }
 
     public void pay(double price) {
-        pocket-= price;
+        pocket -= price;
     }
 
     public boolean isAdult() {
@@ -70,7 +70,6 @@ public class User implements UserDetails {
             return false;
         }
     }
-
 
 
     @Override

@@ -37,7 +37,7 @@ public class UserDTO {
 
     public List<UserOrderDTO> creatOrdersDTO(List<UserOrder> userOrders) {
         List<UserOrderDTO> ordersDTO = new ArrayList<>();
-        for (UserOrder order: userOrders) {
+        for (UserOrder order : userOrders) {
             ordersDTO.add(new UserOrderDTO(order));
         }
         return ordersDTO;
