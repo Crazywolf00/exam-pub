@@ -32,7 +32,10 @@ public class ApiController {
 
     @GetMapping("/users/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
+        if(userService.getUserById(id) != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/drink-menu")
