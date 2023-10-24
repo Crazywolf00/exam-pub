@@ -1,6 +1,7 @@
 package com.example.exampub.services;
 
 import com.example.exampub.models.Product;
+import com.example.exampub.models.Role;
 import com.example.exampub.models.User;
 import com.example.exampub.models.UserOrder;
 import com.example.exampub.models.dtos.OrdersInfoDTO;
@@ -81,7 +82,9 @@ public class OrderServiceImpl implements OrderService {
     public List<UserDTO> getAllUsersOrderInfo() {
         List<UserDTO> usersOrdersDTO = new ArrayList<>();
         for (User user : userRepository.findAll()) {
-            usersOrdersDTO.add(new UserDTO(user));
+            if(user.getRole() == Role.USER) {
+                usersOrdersDTO.add(new UserDTO(user));
+            }
         }
         return usersOrdersDTO;
     }
