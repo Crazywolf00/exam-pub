@@ -44,14 +44,15 @@ public class ApiController {
 
     @PostMapping("/buy")
     public ResponseEntity<?> buy(@RequestParam Long userID,
-                                 @RequestParam Long productID) {
+                                 @RequestParam Long productID,
+                                 @RequestParam int amount) {
 
         if (userService.getUserById(userID) == null || productService.getProductByID(productID) == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(userService.getUserById(userID) == null ? "User not found" : "Product not found");
         }
 
-        String result = userService.orderMediation(productService.getProductByID(productID), userID);
+        String result = userService.orderMediation(productService.getProductByID(productID), userID, amount);
         if (Objects.equals(result, "You are too yong") || Objects.equals(result, "You don't have enough money")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
         } else {

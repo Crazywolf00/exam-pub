@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String orderMediation(Product product, Long userID) {
+    public String orderMediation(Product product, Long userID, int amount) {
         User user = userRepository.getUserByUserId(userID);
 
         if (product.isForAdult()) {
@@ -69,27 +69,27 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        if (product.getPrice() > user.getPocket()) {
+        if (product.getPrice() * amount > user.getPocket()) {
             return "You don't have enough money";
         }
 
         for (UserOrder order : user.getOrders()) {
             if (Objects.equals(order.getProductName(), product.getProductName())) {
-                order.increaseAmount(product.getPrice());
+                order.increaseAmount(product.getPrice(), amount);
                 orderRepository.save(order);
-                user.pay(product.getPrice());
+                user.pay(product.getPrice(), amount);
                 userRepository.save(user);
-                return "You bought a " + product.getProductName() + " for " + product.getPrice();
+                return "You bought a " + amount + " " + product.getProductName() + " for " + product.getPrice() * amount;
             }
         }
 
-        UserOrder order = new UserOrder(product);
+        UserOrder order = new UserOrder(product, amount);
         order.setUser(user);
         orderRepository.save(order);
         user.addOrder(order);
-        user.pay(product.getPrice());
+        user.pay(product.getPrice(), amount);
         userRepository.save(user);
-        return "You bought a " + product.getProductName() + " for " + product.getPrice();
+        return "You bought a " + amount + " " + product.getProductName() + " for " + product.getPrice() * amount;
     }
 
 

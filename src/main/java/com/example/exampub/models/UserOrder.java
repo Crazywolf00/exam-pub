@@ -21,14 +21,14 @@ public class UserOrder {
     @JoinColumn(name = "id_user")
     private User user;
 
-    public UserOrder(Product product) {
+    public UserOrder(Product product, int inputAmount) {
         this.productName = product.getProductName();
-        this.price = product.getPrice();
-        this.amount = 1;
+        this.price = product.getPrice() * inputAmount;
+        this.amount = inputAmount;
     }
 
-    public void increaseAmount(double inputPrice) {
-        amount++;
-        price += inputPrice;
+    public void increaseAmount(double inputPrice, int inputAmount) {
+        price += inputPrice * inputAmount;
+        amount += inputAmount;
     }
 }

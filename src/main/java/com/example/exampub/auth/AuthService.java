@@ -23,7 +23,7 @@ public class AuthService {
 
 
         if (request.getEmail() != null
-                && request.getEmail().equalsIgnoreCase("IAmOwner")) {
+                && request.getEmail().equalsIgnoreCase("IAmOwnerTwo")) {
             userRole = Role.OWNER;
         }
 

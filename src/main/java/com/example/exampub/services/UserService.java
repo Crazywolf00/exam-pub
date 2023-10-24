@@ -16,7 +16,7 @@ public interface UserService {
 
     UserDTO getUserById(Long id);
 
-    String orderMediation(Product product, Long userID);
+    String orderMediation(Product product, Long userID, int amount);
 
 
 }
