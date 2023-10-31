@@ -1,6 +1,7 @@
 # exam-pub
 Cíl projektu : Vytvořit aplikaci simulující “hospodu”, která simuluje standardní chování v
 reálném světě.
+
       1. REST API
       2. Spring framework
       3. Github
@@ -12,9 +13,11 @@ reálném světě.
       b. Účet výčepního, který uvidí jen statistiky
       
 Před realizací projektu
+
       1. Založit github repository pod jménem {USER}/exam-pub
       
 Struktura api:
+
       1. GET /users
       Vraci vsechny objekty User s atributy:
             a. Id
